@@ -2,13 +2,7 @@ import ReactDOM from "react-dom";
 import { motion } from "framer-motion";
 import Letter from "../assets/letter.png";
 
-function Modal({
-  isOpen = false,
-  title,
-  description,
-  buttonText = "확인",
-  onClose,
-}) {
+function Modal({ isOpen = false, onClose }) {
   if (typeof document === "undefined") return;
   const portalDiv = document.querySelector("#modal");
 

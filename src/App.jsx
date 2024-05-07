@@ -13,7 +13,6 @@ import Header from "./components/Header";
 function App() {
   const [msgList, setMsgList] = useState([]);
   const [text, setText] = useState("");
-
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [emailTxt, setEmailTxt] = useState("");
   const [isChatValid, setIsChatValid] = useState(true);
@@ -182,9 +181,6 @@ function App() {
       {isEmailModalOpen && (
         <Modal
           isOpen={isEmailModalOpen}
-          title="fsdf"
-          description="dsfsfsedf"
-          buttonText="확인"
           onClose={() => setIsEmailModalOpen(false)}
         ></Modal>
       )}
