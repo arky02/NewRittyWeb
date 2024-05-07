@@ -16,7 +16,7 @@ function ChatBubble({ sender, msg, action }) {
       ></img>
       <div className="inline-block w-fit text-sm relative mx-0 my-[15px] bg-[#EDEDED] float-left clear-both text-[#000000] py-[8px] px-[13px] rounded-[.875rem_.875rem_.875rem_0]">
         {action === "loading" ? (
-          <div className="flex space-x-1 justify-center items-center  p-[.3125rem] ">
+          <div className="flex space-x-1 justify-center items-center  p-[7.2px] ">
             <div className="h-[6px] w-[6px] bg-[#919191] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
             <div className="h-[6px] w-[6px] bg-[#919191] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
             <div className="h-[6px] w-[6px] bg-[#919191] rounded-full animate-bounce"></div>
