@@ -155,7 +155,7 @@ function App() {
           <div className="flex relative justify-between items-center w-full pt-[15px] pb-[10px] px-[25px] shadow-lg shadow-black">
             <motion.div whileTap={{ scale: 0.97 }} className="w-full">
               <textarea
-                className="w-full h-[47px] resize-none rounded-[1.875rem] py-[.625rem] pl-[1.375rem] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px]"
+                className="w-full h-[47px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px]"
                 placeholder={T.InputPlaceholder[0]}
                 value={text}
                 text={text}
