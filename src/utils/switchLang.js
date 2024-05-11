@@ -14,10 +14,7 @@ const T = {
     "Enter email and get app launch news!",
   ],
   EnterEmail: ["입양하기", "Enter"],
-  GreetingMsg: [
-    "안녕하냥🐾 나는 리티다냥! 너는 이름이 뭐냥?🐱",
-    "Hello🐾 I am Ritty! What's your name? 🐱",
-  ],
+  GreetingMsg: ["오늘 하루는 어땠냥? 🐱", "Hello🐾 How was your day?🐱"],
   InputPlaceholder: [
     "심심한 고양이 리티에게 말을 걸어보세요!",
     "Talk to a bored cat, Ritty!",

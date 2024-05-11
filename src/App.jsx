@@ -5,25 +5,47 @@ import Modal from "./components/Modal";
 import rittyHeroImg from "./assets/rittyHeroImg.png";
 import axios from "axios";
 import T from "./utils/switchLang";
-import { reqChatResponse } from "./api/capsuleRequests";
+import { reqChatResponse, reqChatEndResponse } from "./api/capsuleRequests";
 import ReactGA from "react-ga4";
 import ChatBubble from "./components/ChatBubble";
 import Header from "./components/Header";
+import WelcomePage from "./welcomePage";
+import { useValidateSession } from "./hooks/useValidateSession";
 
 function App() {
   const [msgList, setMsgList] = useState([]);
   const [text, setText] = useState("");
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(true);
   const [emailTxt, setEmailTxt] = useState("");
   const [isChatValid, setIsChatValid] = useState(true);
+  const [pageIdx, setPageIdx] = useState(0);
+  const [modalState, setModalState] = useState(null);
   const scrollRef = useRef();
+  const [today, setToday] = useState();
+  const { saveUserInfo, isEmailSaved, isNameSaved, getEmail } =
+    useValidateSession();
 
   useEffect(() => {
-    // ga initialize
     if (process.env.REACT_APP_GOOGLE_ANALYTICS) {
+      // ga initialize
       ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
     }
+
+    const dayList = ["일", "월", "화", "수", "목", "금", "토"];
+
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+    const dayOfWeek = today.getDay();
+    const currentDate =
+      year + "년 " + month + "월 " + date + "일 " + dayList[dayOfWeek] + "요일";
+    setToday(currentDate);
   }, []);
+
+  useEffect(() => {
+    if (!isNameSaved() && pageIdx === 1) setModalState("setName");
+  }, [pageIdx]);
 
   useEffect(() => {
     scrollToBottom();
@@ -120,68 +142,92 @@ function App() {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
+  console.log(pageIdx);
 
   return (
     <main className="flex h-[100vh] bg-white w-[100vw]">
-      {/* 왼쪽 섹션 */}
-      <section className="w-fit pr-[40px] pl-[70px] z-10 bg-white bg-gradient-to-b from-[#FFF8F0] to-[#FFD4CB] justify-center items-center md:flex hidden">
+      {/* 웹 왼쪽 섹션 */}
+      <section className="w-full pr-[40px] pl-[70px] z-10 bg-white bg-gradient-to-b from-[#FFF8F0] to-[#FFD4CB] justify-center items-center md:flex hidden">
         <img src={rittyHeroImg} width={344} height={189}></img>
       </section>
 
-      {/* 오른쪽 섹션 */}
-      <section className="flex flex-col h-full w-full relative z-0">
-        <Header />
-        <>
-          <div
-            className="h-full w-full overflow-y-auto p-[25px]"
-            ref={scrollRef}
-          >
-            {ChatBubble({
-              sender: "ritty",
-              msg: T.GreetingMsg[0],
-            })}
+      {/* 모바일 섹션 */}
+      <section className="flex flex-col h-full w-full md:w-[400px] relative z-0">
+        {!pageIdx ? (
+          <WelcomePage onBtnClick={() => setPageIdx(1)} today={today} />
+        ) : (
+          <>
+            <Header modalState={modalState} setModalState={setModalState} />
+            <>
+              <div
+                className="h-full w-full overflow-y-auto p-[25px]"
+                ref={scrollRef}
+              >
+                <h5 className="w-full text-center text-[#A6A6A6] text-[13px] -mt-1 mb-3">
+                  {today}
+                </h5>
+                {ChatBubble({
+                  sender: "ritty",
+                  msg: T.GreetingMsg[0],
+                })}
 
-            {msgList.length > 0 &&
-              msgList.map((msgEl, idx) =>
-                ChatBubble({
-                  key: idx,
-                  sender: msgEl?.id,
-                  msg: msgEl?.content,
-                  action: msgEl?.action,
-                })
-              )}
-          </div>
+                {msgList.length > 0 &&
+                  msgList.map((msgEl, idx) =>
+                    ChatBubble({
+                      key: idx,
+                      sender: msgEl?.id,
+                      msg: msgEl?.content,
+                      action: msgEl?.action,
+                    })
+                  )}
+              </div>
 
-          <div className="flex relative justify-between items-center w-full pt-[15px] pb-[10px] px-[25px] shadow-lg shadow-black">
-            <motion.div whileTap={{ scale: 0.97 }} className="w-full">
-              <textarea
-                className="w-full h-[47px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px]"
-                placeholder={T.InputPlaceholder[0]}
-                value={text}
-                text={text}
-                onChange={(e) => {
-                  setText(e.target.value);
-                  sendMyTextByEnter(e);
-                }}
-              />
-            </motion.div>
+              <div className="flex relative justify-between items-center w-full pt-[15px] pb-[10px] px-[25px] shadow-lg shadow-black">
+                <motion.div whileTap={{ scale: 0.97 }} className="w-full">
+                  <textarea
+                    className="w-full h-[47px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px]"
+                    placeholder={T.InputPlaceholder[0]}
+                    value={text}
+                    text={text}
+                    onChange={(e) => {
+                      setText(e.target.value);
+                      sendMyTextByEnter(e);
+                    }}
+                  />
+                </motion.div>
 
-            <button
-              id="send"
-              className="absolute right-[34px] top-[26px] bg-transparent cursor-pointer border-[none]"
-              onClick={sendMyText}
-              disabled={!isChatValid}
-            >
-              <img src={Send} width="34" height="34" />
-            </button>
-          </div>
-        </>
+                <button
+                  id="send"
+                  className="absolute right-[34px] top-[26px] bg-transparent cursor-pointer border-[none]"
+                  onClick={sendMyText}
+                  disabled={!isChatValid}
+                >
+                  <img src={Send} width="34" height="34" />
+                </button>
+              </div>
+            </>
+          </>
+        )}
       </section>
 
-      {isEmailModalOpen && (
+      {/* 웹 오른쪽 섹션 */}
+      <section className="lg:w-[400px] w-[100px] lg:p-[150px]  z-10 bg-white bg-gradient-to-b from-[#FFF8F0] to-[#FFD4CB] justify-center items-center md:flex hidden"></section>
+
+      {modalState && (
         <Modal
+          type={modalState}
           isOpen={isEmailModalOpen}
-          onClose={() => setIsEmailModalOpen(false)}
+          onClose={() => setModalState(null)}
+          onOKClick={() => {
+            console.log("modalState", modalState);
+            if (modalState === "exit") {
+              setModalState("sendEmail");
+            }
+            if (modalState === "sendEmail") {
+              const emailTxt = getEmail();
+              reqChatEndResponse({ email: emailTxt, messageList: msgList });
+            }
+          }}
         ></Modal>
       )}
     </main>
