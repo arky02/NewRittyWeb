@@ -10,6 +10,7 @@ import {
   reqSaveUserResponse,
   reqUserNameResponse,
 } from "../api/capsuleRequests";
+import { validateEmail } from "../utils/validation";
 
 // type: isFirst changeInfo setName exit sendEmail
 function Modal({
@@ -23,7 +24,7 @@ function Modal({
     useValidateSession();
 
   useEffect(() => {
-    if (isEmailSaved) setEmailInfoSaved(true);
+    if (isEmailSaved()) setEmailInfoSaved(true);
   }, []);
 
   if (typeof document === "undefined") return;
@@ -50,8 +51,7 @@ function Modal({
     <></>
   );
 
-  async function saveUserInfoToServer() {
-    const email = getEmail();
+  async function saveUserInfoToServer({ email }) {
     const name = getName();
     let response = await reqSaveUserResponse({ email: email, name: name });
     return response;
@@ -105,7 +105,7 @@ function Modal({
           </p>
         )}
 
-        {type === "sendEmail" && !isEmailSaved && (
+        {!isEmailInfoSaved && (
           <div className="flex h-[48px] gap-[10px] w-full px-[25px]">
             <motion.div whileTap={{ scale: 0.95 }} className="w-full h-full">
               <input
@@ -118,9 +118,19 @@ function Modal({
             </motion.div>
             <Button
               onClick={() => {
+                if (emailTxt === "") {
+                  alert("이메일을 입력 해 주세요.");
+                  return;
+                }
+
+                if (!validateEmail(emailTxt)) {
+                  alert("이메일 형식에 맞지 않습니다. 다시 입력해 주세요.");
+                  setEmailTxt("");
+                  return;
+                }
                 saveUserInfo({ type: "user_email", context: emailTxt });
                 setEmailInfoSaved(true);
-                saveUserInfoToServer();
+                saveUserInfoToServer({ email: emailTxt });
               }}
               text="보내기"
               style={"w-fit"}
@@ -136,8 +146,15 @@ function Modal({
 
     const getUserName = async () => {
       const response = await reqUserNameResponse({ email: emailTxt });
-      console.log(response);
-      // response에 따라 에러처리, 이름 저장
+
+      if (response.data.length === 0) {
+        // 이름 정보 없음 - 회원 X
+        alert("회원 정보가 없습니다!");
+      } else {
+        const userName = response.data[0].name;
+        alert(`안녕하세요 ${userName}님! 😺`);
+        saveUserInfo({ type: "user_name", context: userName });
+      }
     };
     return (
       <div className="z-[100px] fixed left-1/2 top-1/2 z-[100] flex h-[177px] w-[320px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-start gap-[20px] rounded-[20px] bg-white shadow-main">
@@ -168,9 +185,19 @@ function Modal({
           </motion.div>
           <Button
             onClick={() => {
-              if (emailTxt !== "") {
-                getUserName();
+              if (emailTxt === "") {
+                alert("이메일을 입력 해 주세요.");
+                return;
               }
+
+              if (!validateEmail(emailTxt)) {
+                alert("이메일 형식에 맞지 않습니다. 다시 입력해 주세요.");
+                setEmailTxt("");
+                return;
+              }
+
+              getUserName();
+              setTimeout(() => onClose(), 2000);
             }}
             text="확인"
             style={"w-fit"}
@@ -214,10 +241,12 @@ function Modal({
           </motion.div>
           <Button
             onClick={() => {
-              if (nameTxt !== "") {
-                saveUserInfo({ type: "user_name", context: nameTxt });
-                onClose();
+              if (nameTxt === "") {
+                alert("이름을 입력 해 주세요!");
+                return;
               }
+              saveUserInfo({ type: "user_name", context: nameTxt });
+              onClose();
             }}
             text="결정하기"
             style={"w-fit"}

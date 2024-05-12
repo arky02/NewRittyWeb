@@ -43,7 +43,6 @@ export const reqSaveUserResponse = async ({ email, name }) => {
 
 export const reqUserNameResponse = async ({ email }) => {
   let response = "";
-  console.log(email);
   try {
     response = await axios.get(
       `http://diaryapi.sam-meows.com/api/getname?email=${email}`

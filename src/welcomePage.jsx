@@ -6,7 +6,7 @@ import Modal from "./components/Modal";
 function WelcomePage({ onBtnClick, today }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <section className="bg-[#FFF6F0] h-full w-[400px] flex items-center">
+    <section className="bg-[#FFF6F0] h-full md:w-[400px] w-full flex items-center">
       <div className=" h-fit w-full flex flex-col gap-[47px] p-[20px] items-center relative">
         <h5 className="font-bold text-[#66443C] text-[18px]">{today}</h5>
         <img src={IdleRitty} width={330} height={330}></img>

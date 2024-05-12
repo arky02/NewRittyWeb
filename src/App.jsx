@@ -60,7 +60,6 @@ function App() {
   function sendMyText() {
     const newMessage = {
       id: "user",
-      action: "none",
       content: text,
     };
     addTextToMsgList(newMessage);
@@ -69,7 +68,6 @@ function App() {
   function sendMyTextByEnter(e) {
     const newMessage = {
       id: "user",
-      action: "none",
       content: text,
     };
     if (e.target.value.includes("\n")) addTextToMsgList(newMessage);
@@ -94,8 +92,7 @@ function App() {
   async function sendMsgToServer(messageList) {
     const loadingMsg = {
       id: "ritty",
-      action: "loading",
-      content: "",
+      content: "ritty_loading_msg",
     };
 
     // set loading msg
@@ -108,41 +105,32 @@ function App() {
 
     // set new msg
     setMsgList((prev) => [
-      ...prev.filter((el) => el.action !== "loading"),
+      ...prev.filter((el) => el.content !== "ritty_loading_msg"),
       response.data,
     ]);
 
     setIsChatValid(true);
   }
 
-  async function sendEmailToServer() {
-    if (emailTxt === "") return;
-    if (!validateEmail(emailTxt)) {
-      alert("이메일 형식에 맞지 않습니다. 다시 입력해 주세요.");
-      setEmailTxt("");
-      return;
-    }
-    try {
-      const response = await axios.post(`https://sam-meows.com/api/log/email`, {
-        email: emailTxt,
-      });
+  // async function sendEmailToServer() {
+  //   if (emailTxt === "") return;
+  //   if (!validateEmail(emailTxt)) {
+  //     alert("이메일 형식에 맞지 않습니다. 다시 입력해 주세요.");
+  //     setEmailTxt("");
+  //     return;
+  //   }
+  //   try {
+  //     const response = await axios.post(`https://sam-meows.com/api/log/email`, {
+  //       email: emailTxt,
+  //     });
 
-      setEmailTxt("");
-      setIsEmailModalOpen(true);
-    } catch {
-      alert("이미 등록된 이메일이거나 이메일 등록에 문제가 발생하였습니다.");
-      setEmailTxt("");
-    }
-  }
-
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-  console.log(pageIdx);
+  //     setEmailTxt("");
+  //     setIsEmailModalOpen(true);
+  //   } catch {
+  //     alert("이미 등록된 이메일이거나 이메일 등록에 문제가 발생하였습니다.");
+  //     setEmailTxt("");
+  //   }
+  // }
 
   return (
     <main className="flex h-[100vh] bg-white w-[100vw]">
@@ -177,7 +165,6 @@ function App() {
                       key: idx,
                       sender: msgEl?.id,
                       msg: msgEl?.content,
-                      action: msgEl?.action,
                     })
                   )}
               </div>
@@ -219,7 +206,6 @@ function App() {
           isOpen={isEmailModalOpen}
           onClose={() => setModalState(null)}
           onOKClick={() => {
-            console.log("modalState", modalState);
             if (modalState === "exit") {
               setModalState("sendEmail");
             }
