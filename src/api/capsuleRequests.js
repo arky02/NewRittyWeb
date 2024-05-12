@@ -3,7 +3,7 @@ import axios from "axios";
 export const reqChatResponse = async (messageList) => {
   let response = "";
   try {
-    response = await axios.post(`https://diaryapi.sam-meows.com/api/chat`, {
+    response = await axios.post(`http://diaryapi.sam-meows.com/api/chat`, {
       message: messageList.filter((el) => el.action !== "loading"),
     });
   } catch {
@@ -16,13 +16,10 @@ export const reqChatResponse = async (messageList) => {
 export const reqChatEndResponse = async ({ email, messageList }) => {
   let response = "";
   try {
-    response = await axios.post(
-      `https://diaryapi.sam-meows.com/api/save/chat`,
-      {
-        email: email,
-        chat: messageList.filter((el) => el.action !== "loading"),
-      }
-    );
+    response = await axios.post(`http://diaryapi.sam-meows.com/api/save/chat`, {
+      email: email,
+      chat: messageList.filter((el) => el.action !== "loading"),
+    });
   } catch {
     alert("서버 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
     return;
@@ -33,13 +30,10 @@ export const reqChatEndResponse = async ({ email, messageList }) => {
 export const reqSaveUserResponse = async ({ email, name }) => {
   let response = "";
   try {
-    response = await axios.post(
-      `https://diaryapi.sam-meows.com/api/save/user`,
-      {
-        email: email,
-        name: name,
-      }
-    );
+    response = await axios.post(`http://diaryapi.sam-meows.com/api/save/user`, {
+      email: email,
+      name: name,
+    });
   } catch {
     alert("서버 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
     return;
@@ -52,7 +46,7 @@ export const reqUserNameResponse = async ({ email }) => {
   console.log(email);
   try {
     response = await axios.get(
-      `https://diaryapi.sam-meows.com/api/getname?email=${email}`
+      `http://diaryapi.sam-meows.com/api/getname?email=${email}`
     );
   } catch {
     alert("서버 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
