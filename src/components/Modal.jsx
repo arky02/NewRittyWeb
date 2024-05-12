@@ -54,7 +54,6 @@ function Modal({
     const email = getEmail();
     const name = getName();
     let response = await reqSaveUserResponse({ email: email, name: name });
-    console.log(response);
     return response;
   }
 
@@ -136,7 +135,7 @@ function Modal({
     const [emailTxt, setEmailTxt] = useState("");
 
     const getUserName = async () => {
-      const response = reqUserNameResponse(emailTxt);
+      const response = await reqUserNameResponse({ email: emailTxt });
       console.log(response);
       // response에 따라 에러처리, 이름 저장
     };
