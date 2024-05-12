@@ -29,7 +29,7 @@ function App() {
       ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
     }
 
-    if (isEmailSaved && isNameSaved) {
+    if (!pageIdx && isEmailSaved() && isNameSaved()) {
       setPageIdx(1);
     }
 

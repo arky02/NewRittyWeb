@@ -150,9 +150,7 @@ function Modal({
                   onOKClick(); // 서버에 오늘의 채팅 기록 전송
                   console.log("send chat log to server");
                 } else {
-                  alert(
-                    "에러가 발생했습니다. 이메일 등록을 다시 진행 해 주세요!"
-                  );
+                  //error
                 }
               }}
               text="보내기"
@@ -175,8 +173,11 @@ function Modal({
         alert("회원 정보가 없습니다!");
       } else {
         const userName = response.data[0].name;
-        alert(`안녕하세요 ${userName}님! 😺`);
+        alert(
+          `안녕하세요 ${userName}님!😺 회원 정보를 성공적으로 불러왔습니다!`
+        );
         saveUserInfo({ type: "user_name", context: userName });
+        saveUserInfo({ type: "user_email", context: emailTxt });
       }
     };
     return (

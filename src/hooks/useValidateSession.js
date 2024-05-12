@@ -16,8 +16,9 @@ export const useValidateSession = () => {
   };
 
   const isEmailSaved = () => {
-    if (cookie.user_email) return true;
-    else return false;
+    if (cookie.user_email) {
+      return true;
+    } else return false;
   };
 
   const isNameSaved = () => {
