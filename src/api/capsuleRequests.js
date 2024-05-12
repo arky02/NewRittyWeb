@@ -35,8 +35,8 @@ export const reqSaveUserResponse = async ({ email, name }) => {
       name: name,
     });
   } catch {
-    alert("서버 오류가 발생하였습니다. 잠시 후 다시 시도해 주세요.");
-    return;
+    alert("이미 등록된 이메일이거나 이메일 등록에 문제가 발생하였습니다.");
+    return null;
   }
   return response;
 };

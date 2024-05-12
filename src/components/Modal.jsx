@@ -54,11 +54,30 @@ function Modal({
   async function saveUserInfoToServer({ email }) {
     const name = getName();
     let response = await reqSaveUserResponse({ email: email, name: name });
+
+    if (response === null) {
+      // 서버 에러거나 중복
+      console.log("user not added to server");
+      onClose();
+      return;
+    } else {
+      saveUserInfo({ type: "user_email", context: email });
+      setEmailInfoSaved(true);
+      console.log("user added to server");
+    }
+
     return response;
   }
 
   function SendEmailModal() {
     const [emailTxt, setEmailTxt] = useState("");
+
+    useEffect(() => {
+      if (isEmailInfoSaved) {
+        console.log("send chat log to server");
+        onOKClick();
+      }
+    }, []);
     return (
       <div className="z-[100px] fixed left-1/2 top-1/2 z-[100] flex h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-start gap-[28px] rounded-[20px] bg-white shadow-main">
         <div className="bg-gradient-to-r from-[#FF917A] to-[#D76371] w-full rounded-t-2xl -mt-1 py-[27px] flex flex-col justify-center items-center relative">
@@ -71,9 +90,6 @@ function Modal({
             width={15}
             height={15}
             onClick={() => {
-              if (isEmailInfoSaved) {
-                onOKClick();
-              }
               onClose();
             }}
             className="absolute top-0 right-[22px] top-[19px] cursor-pointer"
@@ -128,9 +144,16 @@ function Modal({
                   setEmailTxt("");
                   return;
                 }
-                saveUserInfo({ type: "user_email", context: emailTxt });
-                setEmailInfoSaved(true);
+
                 saveUserInfoToServer({ email: emailTxt });
+                if (isEmailInfoSaved) {
+                  onOKClick(); // 서버에 오늘의 채팅 기록 전송
+                  console.log("send chat log to server");
+                } else {
+                  alert(
+                    "에러가 발생했습니다. 이메일 등록을 다시 진행 해 주세요!"
+                  );
+                }
               }}
               text="보내기"
               style={"w-fit"}

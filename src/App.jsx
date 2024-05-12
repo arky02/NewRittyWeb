@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import Send from "./assets/send.svg";
 import Modal from "./components/Modal";
 import rittyHeroImg from "./assets/rittyHeroImg.png";
-import axios from "axios";
 import T from "./utils/switchLang";
 import { reqChatResponse, reqChatEndResponse } from "./api/capsuleRequests";
 import ReactGA from "react-ga4";
@@ -16,7 +15,6 @@ function App() {
   const [msgList, setMsgList] = useState([]);
   const [text, setText] = useState("");
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(true);
-  const [emailTxt, setEmailTxt] = useState("");
   const [isChatValid, setIsChatValid] = useState(true);
   const [pageIdx, setPageIdx] = useState(0);
   const [modalState, setModalState] = useState(null);
@@ -29,6 +27,10 @@ function App() {
     if (process.env.REACT_APP_GOOGLE_ANALYTICS) {
       // ga initialize
       ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
+    }
+
+    if (isEmailSaved && isNameSaved) {
+      setPageIdx(1);
     }
 
     const dayList = ["일", "월", "화", "수", "목", "금", "토"];
@@ -111,26 +113,6 @@ function App() {
 
     setIsChatValid(true);
   }
-
-  // async function sendEmailToServer() {
-  //   if (emailTxt === "") return;
-  //   if (!validateEmail(emailTxt)) {
-  //     alert("이메일 형식에 맞지 않습니다. 다시 입력해 주세요.");
-  //     setEmailTxt("");
-  //     return;
-  //   }
-  //   try {
-  //     const response = await axios.post(`https://sam-meows.com/api/log/email`, {
-  //       email: emailTxt,
-  //     });
-
-  //     setEmailTxt("");
-  //     setIsEmailModalOpen(true);
-  //   } catch {
-  //     alert("이미 등록된 이메일이거나 이메일 등록에 문제가 발생하였습니다.");
-  //     setEmailTxt("");
-  //   }
-  // }
 
   return (
     <main className="flex h-[100vh] bg-white w-[100vw]">
