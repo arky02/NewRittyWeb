@@ -12,7 +12,11 @@ import WelcomePage from "./welcomePage";
 import { useValidateSession } from "./hooks/useValidateSession";
 
 function App() {
-  const [msgList, setMsgList] = useState([]);
+  const initialMsg = {
+    id: "ritty",
+    content: T.GreetingMsg[0],
+  };
+  const [msgList, setMsgList] = useState([initialMsg]);
   const [text, setText] = useState("");
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(true);
   const [isChatValid, setIsChatValid] = useState(true);
@@ -25,7 +29,7 @@ function App() {
 
   useEffect(() => {
     if (process.env.REACT_APP_GOOGLE_ANALYTICS) {
-      // ga initialize
+      // GA initialize
       ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
     }
 
@@ -136,10 +140,6 @@ function App() {
                 <h5 className="w-full text-center text-[#A6A6A6] text-[13px] -mt-1 mb-3">
                   {today}
                 </h5>
-                {ChatBubble({
-                  sender: "ritty",
-                  msg: T.GreetingMsg[0],
-                })}
 
                 {msgList.length > 0 &&
                   msgList.map((msgEl, idx) =>
