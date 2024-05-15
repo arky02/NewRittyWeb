@@ -134,10 +134,10 @@ function App() {
             <Header modalState={modalState} setModalState={setModalState} />
             <>
               <div
-                className="h-full w-full overflow-y-auto p-[25px]"
+                className="h-full w-full overflow-y-auto p-[18px]"
                 ref={scrollRef}
               >
-                <h5 className="w-full text-center text-[#A6A6A6] text-[13px] -mt-1 mb-3">
+                <h5 className="w-full text-center text-[#A6A6A6] md:text-[13px] text-[11px] -mt-1 mb-3">
                   {today}
                 </h5>
 
@@ -151,10 +151,10 @@ function App() {
                   )}
               </div>
 
-              <div className="flex relative justify-between items-center w-full pt-[15px] pb-[10px] px-[25px] shadow-lg shadow-black">
+              <div className="flex relative justify-between items-center w-full py-[10px] md:py-[15px] px-[15px] shadow-lg shadow-black">
                 <motion.div whileTap={{ scale: 0.97 }} className="w-full">
                   <textarea
-                    className="w-full h-[47px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px]"
+                    className="w-full h-[47px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px] text-[15px] md:text-[16px] flex items-center"
                     placeholder={T.InputPlaceholder[0]}
                     value={text}
                     text={text}
@@ -167,7 +167,7 @@ function App() {
 
                 <button
                   id="send"
-                  className="absolute right-[34px] top-[26px] bg-transparent cursor-pointer border-[none]"
+                  className="absolute right-[24px] md:top-[26px] top-[21px] bg-transparent cursor-pointer border-[none]"
                   onClick={sendMyText}
                   disabled={!isChatValid}
                 >
