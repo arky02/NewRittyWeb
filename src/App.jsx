@@ -126,7 +126,7 @@ function App() {
       </section>
 
       {/* 모바일 섹션 */}
-      <section className="flex flex-col h-full w-full md:w-[400px] relative z-0">
+      <section className="flex flex-col h-full w-full md:w-[400px] relative z-0 ">
         {!pageIdx ? (
           <WelcomePage onBtnClick={() => setPageIdx(1)} today={today} />
         ) : (
