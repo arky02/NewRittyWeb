@@ -79,7 +79,7 @@ function App() {
     if (e.target.value.includes("\n")) addTextToMsgList(newMessage);
   }
   function addTextToMsgList(newMsg) {
-    if (text.length > 50) alert("50자 이내로 작성해주세요.");
+    if (text.length > 150) alert("150자 이내로 작성해주세요.");
     else if (text.includes("종료")) {
       setIsEmailModalOpen(true);
       setText("");
