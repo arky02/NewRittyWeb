@@ -79,10 +79,10 @@ function Modal({
       }
     }, []);
     return (
-      <div className="z-[100px] fixed left-1/2 top-1/2 z-[100] flex h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-start gap-[28px] rounded-[20px] bg-white shadow-main">
-        <div className="bg-gradient-to-r from-[#FF917A] to-[#D76371] w-full rounded-t-2xl -mt-1 py-[27px] flex flex-col justify-center items-center relative">
+      <div className="z-[100px] fixed left-1/2 top-1/2 z-[100] flex md:h-[390px] h-[317px] w-[300px] md:w-[380px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-start md:gap-[28px] gap-[20px] rounded-[20px] bg-white shadow-main">
+        <div className="bg-gradient-to-r from-[#FF917A] to-[#D76371] w-full rounded-t-2xl -mt-1 md:py-[27px] py-[15px] flex flex-col justify-center items-center relative">
           <img src={Letter} width={70} height={55} alt="메일" />
-          <span className="text-white text-[25px] font-semibold">
+          <span className="text-white md:text-[25px] text-[20px] font-bold">
             기록 완료
           </span>
           <img
@@ -98,7 +98,7 @@ function Modal({
         </div>
 
         {isEmailInfoSaved ? (
-          <p className="text-[#1A1A1A] w-[300px] text-center">
+          <p className="text-[#1A1A1A] w-[300px] text-center text-[14px] md:text-[16px]">
             리티와의 대화가 종료되었습니다.
             <br /> 오늘의 기록은 메일로 전송됩니다. <br />
             <br />
@@ -108,12 +108,12 @@ function Modal({
             <br />
             {""}
             <br />
-            <h5 className="text-[12px] text-[#9B9B9B]">
+            <h5 className="md:text-[12px] text-[10px] -mt-1 text-[#9B9B9B]">
               이메일 변경을 원할 시, 설정 버튼을 눌러주세요
             </h5>
           </p>
         ) : (
-          <p className="text-[#1A1A1A] w-[300px] text-center">
+          <p className="text-[#1A1A1A] w-[300px] text-center text-[14px] md:text-[16px]">
             리티와의 대화가 종료되었습니다. <br />
             오늘의 기록을 받을 메일을 입력해주세요. <br />
             리티가 당신과 함께한 기록을 작성해 <br />
@@ -125,7 +125,7 @@ function Modal({
           <div className="flex h-[48px] gap-[10px] w-full px-[25px]">
             <motion.div whileTap={{ scale: 0.95 }} className="w-full h-full">
               <input
-                className="bg-[#F1F1F1] color-black rounded-[15px] px-[15px] w-full h-full"
+                className="bg-[#F1F1F1] color-black rounded-[15px] px-[15px] w-full h-full text-[14px] md:text-[16px]"
                 placeholder="이메일을 입력해주세요"
                 text={emailTxt}
                 value={emailTxt}

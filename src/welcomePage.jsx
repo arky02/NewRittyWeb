@@ -26,7 +26,7 @@ function WelcomePage({ onBtnClick, today }) {
         <div className="w-full text-center ">
           <Button
             text="안녕, 리티!"
-            fontSize={18.5}
+            style={"text-[18.5px]"}
             height={51}
             onClick={onBtnClick}
           ></Button>
