@@ -7,7 +7,7 @@ function WelcomePage({ onBtnClick, today }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <section className="bg-[#FFF6F0] h-full md:w-[400px] w-full flex items-center">
-      <div className=" h-fit w-full flex flex-col md:gap-[47px] gap-[30px] p-[20px] items-center relative">
+      <div className=" h-fit w-full flex flex-col md:gap-[47px] gap-[30px] px-[20px] items-center relative">
         <h5 className="font-bold text-[#66443C] md:text-[18px] text-[16px]">
           {today}
         </h5>
