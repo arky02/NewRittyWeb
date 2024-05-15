@@ -119,7 +119,7 @@ function App() {
   }
 
   return (
-    <main className="flex h-[100dvh] bg-white w-[100vw]">
+    <main className="flex h-[100svh] bg-white w-[100vw]">
       {/* 웹 왼쪽 섹션 */}
       <section className="w-full pr-[40px] pl-[70px] z-10 bg-white bg-gradient-to-b from-[#FFF8F0] to-[#FFD4CB] justify-center items-center md:flex hidden">
         <img src={rittyHeroImg} width={344} height={189}></img>
