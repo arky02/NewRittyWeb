@@ -7,7 +7,7 @@ import { useState } from "react";
 
 function Header({ modalState, setModalState }) {
   return (
-    <div className="bg-[#FFF6F0] w-full md:w-[400px] h-fit border-b-[1px] px-[15px] md:py-[15px] py-[11px] flex md:relative items-center gap-[15px] font-bold justify-between absolute top-0">
+    <div className="bg-[#FFF6F0] w-full md:w-[400px] h-fit border-b-[1px] px-[15px] md:py-[15px] py-[11px] flex md:relative items-center gap-[15px] font-bold justify-between fixed top-0">
       <section className="flex gap-[15px]">
         <img src={RittyImg} width={41} height={41} alt="리티 프로필" />
         <div>

@@ -151,7 +151,7 @@ function App() {
                   )}
               </div>
 
-              <div className="md:flex md:relative justify-between items-center w-full  pb-[20px] md:pb-[30px] py-[10px] px-[15px] shadow-lg shadow-black absolute bottom-0 bg-white">
+              <div className="md:flex md:relative justify-between items-center w-full  pb-[20px] md:pb-[30px] py-[10px] px-[15px] shadow-lg shadow-black fixed bottom-0 bg-white">
                 <motion.div whileTap={{ scale: 0.97 }} className="w-full">
                   <textarea
                     className="w-full md:h-[47px] h-[45px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px] text-[14px] md:text-[16px] flex items-center"
