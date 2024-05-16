@@ -2,7 +2,7 @@ import RittyImg from "../assets/rittyImg.png";
 
 function ChatBubble({ sender, msg }) {
   return sender === "user" ? (
-    <div className="inline-block w-fit text-sm relative mx-0 my-[15px] bg-[#FF917A] float-right clear-both text-white py-[8px] px-[13px] rounded-[.875rem_.875rem_0_.875rem]">
+    <div className="inline-block w-fit text-sm relative mx-0 md:my-[15px] my-[8px] bg-[#FF917A] float-right clear-both text-white py-[8px] px-[13px] rounded-[.875rem_.875rem_0_.875rem]">
       {msg}
     </div>
   ) : (
@@ -11,7 +11,7 @@ function ChatBubble({ sender, msg }) {
         src={RittyImg}
         width={35}
         height={35}
-        className="bg-contain h-[35px] mr-[10px] mb-[13px]"
+        className="bg-contain h-[35px] mr-[10px] mb-[8px]"
       ></img>
       <div className="inline-block w-fit text-sm relative mx-0 my-[10px] bg-[#EDEDED] float-left clear-both text-[#000000] py-[8px] px-[13px] rounded-[.875rem_.875rem_.875rem_0]">
         {msg === "ritty_loading_msg" ? (
