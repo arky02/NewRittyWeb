@@ -8,7 +8,7 @@ function WelcomePage({ onBtnClick, today }) {
   return (
     <section className="bg-[#FFF6F0] h-full md:w-[400px] w-full flex items-center">
       <div className=" h-fit w-full flex flex-col md:gap-[47px] gap-[30px] px-[20px] items-center relative">
-        <h5 className="font-semibold text-[#66443C] md:text-[16px] text-[14.5px]">
+        <h5 className="font-semibold text-[#66443C] md:text-[16px] text-[14.5px] md:-mt-[0px] -mt-[15px]">
           {today}
         </h5>
         <img
