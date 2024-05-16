@@ -13,8 +13,8 @@ function WelcomePage({ onBtnClick, today }) {
         </h5>
         <img
           src={IdleRitty}
-          width={320}
-          height={320}
+          width={310}
+          height={310}
           className="-mt-[15px]"
         ></img>
         <p className="font-bold text-[#66443C] md:text-[19px] text-[18px] text-center">
@@ -26,7 +26,7 @@ function WelcomePage({ onBtnClick, today }) {
         <div className="w-full text-center ">
           <Button
             text="안녕, 리티!"
-            style={"text-[18.5px]"}
+            style={"md:text-[19px] text-[16px]"}
             height={51}
             onClick={onBtnClick}
           ></Button>
