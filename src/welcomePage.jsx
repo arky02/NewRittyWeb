@@ -8,14 +8,14 @@ function WelcomePage({ onBtnClick, today }) {
   return (
     <section className="bg-[#FFF6F0] h-full md:w-[400px] w-full flex items-center">
       <div className=" h-fit w-full flex flex-col md:gap-[47px] gap-[30px] px-[20px] items-center relative">
-        <h5 className="font-bold text-[#66443C] md:text-[18px] text-[16px]">
+        <h5 className="font-semibold text-[#66443C] md:text-[16px] text-[14.5px]">
           {today}
         </h5>
         <img
           src={IdleRitty}
           width={310}
           height={310}
-          className="-mt-[15px]"
+          className="-mt-[20px]"
         ></img>
         <p className="font-bold text-[#66443C] md:text-[19px] text-[18px] text-center">
           반가워냥! 나는 리티다냥 😺
