@@ -154,18 +154,16 @@ function App() {
             </section>
 
             <div className="md:flex justify-between items-center w-full md:w-[400px]  pb-[20px] md:pb-[30px] py-[10px] px-[15px] shadow-lg shadow-black fixed bottom-0 bg-white z-50">
-              <motion.div whileTap={{ scale: 0.97 }} className="w-full">
-                <textarea
-                  className="w-full md:h-[47px] h-[45px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px] text-[14px] md:text-[16px] flex items-center"
-                  placeholder={T.InputPlaceholder[0]}
-                  value={text}
-                  text={text}
-                  onChange={(e) => {
-                    setText(e.target.value);
-                    sendMyTextByEnter(e);
-                  }}
-                />
-              </motion.div>
+              <textarea
+                className="w-full md:h-[47px] h-[45px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px] text-[14px] md:text-[16px] flex items-center"
+                placeholder={T.InputPlaceholder[0]}
+                value={text}
+                text={text}
+                onChange={(e) => {
+                  setText(e.target.value);
+                  sendMyTextByEnter(e);
+                }}
+              />
 
               <button
                 id="send"
