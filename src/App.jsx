@@ -132,11 +132,10 @@ function App() {
         ) : (
           <>
             <Header modalState={modalState} setModalState={setModalState} />
-            {/* mobile 일 때 Fixed Header height 갖게 해주는 div */}
-            <div className="w-full h-[80px] md:hidden block" />
-            <>
+            <section className="h-full w-full md:pt-0 pt-[64px] md:pb-0 pb-[77px]">
+              {/* 채팅 영역 */}
               <div
-                className="h-full w-full overflow-y-auto p-[18px] md:mt-0 mt-[64px] md:mb-0 mb-[77px]"
+                className="h-full w-full overflow-y-auto p-[18px]"
                 ref={scrollRef}
               >
                 <h5 className="w-full text-center text-[#A6A6A6] md:text-[13px] text-[11px] -mt-1 mb-3">
@@ -152,31 +151,31 @@ function App() {
                     })
                   )}
               </div>
+            </section>
 
-              <div className="md:flex md:relative justify-between items-center w-full  pb-[20px] md:pb-[30px] py-[10px] px-[15px] shadow-lg shadow-black fixed bottom-0 bg-white z-50">
-                <motion.div whileTap={{ scale: 0.97 }} className="w-full">
-                  <textarea
-                    className="w-full md:h-[47px] h-[45px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px] text-[14px] md:text-[16px] flex items-center"
-                    placeholder={T.InputPlaceholder[0]}
-                    value={text}
-                    text={text}
-                    onChange={(e) => {
-                      setText(e.target.value);
-                      sendMyTextByEnter(e);
-                    }}
-                  />
-                </motion.div>
+            <div className="md:flex justify-between items-center w-full md:w-[400px]  pb-[20px] md:pb-[30px] py-[10px] px-[15px] shadow-lg shadow-black fixed bottom-0 bg-white z-50">
+              <motion.div whileTap={{ scale: 0.97 }} className="w-full">
+                <textarea
+                  className="w-full md:h-[47px] h-[45px] resize-none rounded-[1.875rem] py-[.625rem] pl-[25px] pr-[2rem] border-[#D6D6D6] bg-[#F9F9F9] border-[.0625rem] my-[5px] text-[14px] md:text-[16px] flex items-center"
+                  placeholder={T.InputPlaceholder[0]}
+                  value={text}
+                  text={text}
+                  onChange={(e) => {
+                    setText(e.target.value);
+                    sendMyTextByEnter(e);
+                  }}
+                />
+              </motion.div>
 
-                <button
-                  id="send"
-                  className="absolute right-[24px] md:top-[22px] top-[20px] bg-transparent cursor-pointer border-[none]"
-                  onClick={sendMyText}
-                  disabled={!isChatValid}
-                >
-                  <img src={Send} width="34" height="34" />
-                </button>
-              </div>
-            </>
+              <button
+                id="send"
+                className="absolute right-[24px] md:top-[22px] top-[20px] bg-transparent cursor-pointer border-[none]"
+                onClick={sendMyText}
+                disabled={!isChatValid}
+              >
+                <img src={Send} width="34" height="34" />
+              </button>
+            </div>
           </>
         )}
       </section>
