@@ -132,7 +132,7 @@ function App() {
         ) : (
           <>
             <Header modalState={modalState} setModalState={setModalState} />
-            <section className="h-full w-full md:pt-0 pt-[82px] md:pb-0 pb-[85px]">
+            <section className="h-full w-full md:pt-0 pt-[100px] md:pb-0 pb-[85px]">
               {/* 채팅 영역 */}
               <div
                 className="h-full w-full overflow-y-auto p-[18px]"
